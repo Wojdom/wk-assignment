@@ -8,4 +8,12 @@
     <ProjectReference Include="..\Common.Domain\Common.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Order\" />
+    <None Remove="Order\ValueObjects\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Order\" />
+    <Folder Include="Order\ValueObjects\" />
+  </ItemGroup>
 </Project>

@@ -12,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MediatR;
 using WebApi.Middlewares;
+using Domain.Order;
+using Application.Order.Create;
 
 namespace WebApi
 {
@@ -32,10 +34,12 @@ namespace WebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WkRecruitmentAssignment", Version = "v1" });
             });
             services.AddMediatR(typeof(AddProductCommandHandler));
+            services.AddMediatR(typeof(CreateOrderCommandHandler));
 
             services.AddSingleton<IShoppingCartRepository, ShoppingCartRepository>();
             services.AddSingleton<IProductRepository, ProductRepository>();
             services.AddSingleton<IDiscountVoucherRepository, DiscountVoucherRepository>();
+            services.AddSingleton<IOrderRepository, OrderRepository>();
 
             services.AddScoped<IActionContextProvider, ActionContextProvider>();
         }

@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Application.Order.Create;
-using Application.ShoppingCart.AddItem;
-using Application.ShoppingCart.UseDiscountCode;
 using MediatR;
 
 namespace WebApi.Controllers
@@ -23,15 +18,11 @@ namespace WebApi.Controllers
         }
         
         [HttpPost("Create")]
-        public async Task<Guid> Create(Guid shoppingCartId, string paymentMethod, string remarks)
+        public async Task<Guid> Create([FromBody]CreateRequest createRequest)
         {
-            if (!Enum.TryParse(paymentMethod, out PaymentMethod paymentMethodEnum))
-            {
-                throw new ArgumentException("Wrong payment method value.");
-            }
-
-            var createRequest = new CreateRequest(shoppingCartId, paymentMethodEnum, remarks);
-            throw new NotImplementedException();
+            var result = await _mediator.Send(
+                new CreateOrderCommand(createRequest));
+            return result;
         }
     }
 }

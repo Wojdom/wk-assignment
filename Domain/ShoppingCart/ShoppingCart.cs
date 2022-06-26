@@ -34,6 +34,11 @@ namespace Domain.ShoppingCart
             }
         }
 
+        public ICollection<ShoppingCartItem> GetProducts()
+        {
+            return _items;
+        }
+
         public void UseDiscountCode(DiscountVoucherId discountVoucherId)
         {
             if (DiscountVoucherId is not null)
